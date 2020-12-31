@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            .container {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 17px;
+                margin: auto;
+                width: 60%;
+                padding: 50px 20px;
+            }
+            .search-container {
+
+            }
+            .info-container {
+              padding: 0px 20px;
+              overflow: auto
+            }
+            .title-info {
+                text-align: center;
+            }
+            .left-info {
+                width: 40%;
+                float: left
+            }
+            .right-info {
+                width: 40%;
+                float: right;
+            }
+        </style>
+    </head>
+    <body style="background-color:#f1f1f1">
+        <div class="container">
+            <div class="search-container">
+                <label for="cars">Choose a city:</label>
+                <select name="cities_list" id="cities_list" style="font-size:17px">
+                    {% for city in cities_list %}
+                        {% if city != selected_city  %}
+                            <option value='{{ city }}'>{{ city }}</option>
+                        {% endif %}
+                        {% if city == selected_city  %}
+                            <option value='{{ city }}' selected>{{ city }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <button onclick="searchWeather()" style="font-size:17px">Search</button>
+            </div>
+            <hr/>
+            <div class="info-container">
+                <div class="title-info">
+                    <h2 style="margin:0px">{{ info_json["current"]["location"] }}</h2>
+                    <h3>{{info_json["current"]["request_time"]}}</h3>
+                    <p>{{ info_json["current"]["description"] }}</p>
+                    <p>
+                        <img src='{{info_json["current"]["icon"]}}' alt="Icon">
+                    </p>
+                </div>
+                <div class="left-info">
+                    <p>
+                        <label>temperature: </label>
+                        <span>{{ info_json["current"]["temperature"] }}</span>
+                    </p>
+                    <p>
+                        <label>humidity: </label>
+                        <span>{{ info_json["current"]["humidity"] }}</span>
+                    </p>
+                    <p>
+                        <label>uv_index: </label>
+                        <span>{{ info_json["current"]["uv_index"] }}</span>
+                    </p>
+                </div>
+                <div class="right-info">
+                    <p>
+                        <label>country: </label>
+                        <span>{{ info_json["current"]["country"] }}</span>
+                    </p>
+                    <p>
+                        <label>last-updated: </label>
+                        <span>{{ info_json["current"]["last-updated"] }}</span>
+                    </p>
+                    <p>
+                        <label>lat - lon: </label>
+                        <span>{{ info_json["current"]["lat - lon"] }}</span>
+                    </p>
+                </div>
+            </div>
+            <hr/>
+            <h3>Next 2 days</h3>
+            <hr/>
+            <div class="forecast-container">
+                <table style="width:100%">
+                    <tr>
+                        {% for obj_forecast in info_json["forecast"] %}
+                            <th>
+                                <h3 style="margin-bottom: 0px">{{ obj_forecast["date"] }}</h3>
+                            </th>
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        {% for obj_forecast in info_json["forecast"] %}
+                            <td>
+                                <p style="text-align: center">
+                                    <span>{{ obj_forecast["description"] }}</span>
+                                </p>
+                                <p style="text-align: center">
+                                    <img src='{{ obj_forecast["icon"] }}' alt="Icon">
+                                </p>
+                                <p>
+                                    <label>temperature:</label>
+                                    <span>{{ obj_forecast["temperature"] }}</span>
+                                </p>
+                                <p>
+                                    <label>uv index:</label>
+                                    <span>{{ obj_forecast["uv_index"] }}</span>
+                                </p>
+                                <p>
+                                    <label>chance of rain:</label>
+                                    <span>{{ obj_forecast["chance_of_rain"] }}</span>
+                                </p>
+                                <p>
+                                    <label>total precipitation:</label>
+                                    <span>{{ obj_forecast["total_precipitation"] }}</span>
+                                </p>
+                                <p>
+                                    <label>average humidity:</label>
+                                    <span>{{ obj_forecast["average_humidity"] }}</span>
+                                </p>
+                            </td>
+                        {% endfor %}
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
+<script>
+    function searchWeather() {
+        var e = document.getElementById("cities_list");
+        var location = e.options[e.selectedIndex].value;
+        window.location.href = "http://127.0.0.1:5000/" + location;
+    }
+</script>
