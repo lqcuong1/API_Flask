@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
@@ -8,10 +9,16 @@ import time
 # pip install PyJWT
 import jwt
 
+
+def get_path_sql_file():
+    print(str(Path(__file__).parent) + r"\db.sqlite3")
+    return str(Path(__file__).parent) + r"\db.sqlite3"
+
+
 # The Engine is how SQLAlchemy communicates with your database
 engine = create_engine(
     # telling where your database currently is located.
-    'sqlite:///D:\\demo_API_Authenticate\\API_Flask\\Database\\db.sqlite3',
+    'sqlite:///' + get_path_sql_file(),
     # The attribute echo=True will make SQLAlchemy to log all SQL commands
     echo=True,
     # By default, check_same_thread is True and only the creating thread may use the connection.
