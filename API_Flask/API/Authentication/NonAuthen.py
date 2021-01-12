@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from Repository import SubjectRepo
+from API_Flask.Repository import *
 app = Flask(__name__)
 
 # region SUBJECT_API

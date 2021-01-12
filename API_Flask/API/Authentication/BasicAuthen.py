@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, request
-from Repository import AccountRepo, SubjectRepo
 from flask_httpauth import HTTPBasicAuth
+from API_Flask.Repository import *
 app = Flask(__name__)
 auth = HTTPBasicAuth()
 

@@ -1,4 +1,4 @@
-from API.Web.Lib import Weather_API
+from API_Flask.API.Web.Lib import Weather_API
 from flask import Flask, render_template
 app = Flask(__name__)
 cities_list = [

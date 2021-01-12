@@ -5,7 +5,7 @@
 #  => NOT an appropriate place to store data between requests.
 #     Use the "session" or a database to store data across requests.
 from flask import Flask, jsonify, request, g
-from Repository import AccountRepo, SubjectRepo
+from API_Flask.Repository import *
 from flask_httpauth import HTTPBasicAuth
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'TMA Company'

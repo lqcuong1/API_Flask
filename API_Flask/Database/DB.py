@@ -11,7 +11,7 @@ import jwt
 # The Engine is how SQLAlchemy communicates with your database
 engine = create_engine(
     # telling where your database currently is located.
-    'sqlite:///D:\\API_Flask\\Database\\db.sqlite3',
+    'sqlite:///D:\\demo_API_Authenticate\\API_Flask\\Database\\db.sqlite3',
     # The attribute echo=True will make SQLAlchemy to log all SQL commands
     echo=True,
     # By default, check_same_thread is True and only the creating thread may use the connection.
